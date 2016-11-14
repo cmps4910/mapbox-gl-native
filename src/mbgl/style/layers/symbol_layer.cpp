@@ -60,7 +60,7 @@ const Filter& SymbolLayer::getFilter() const {
 // Layout properties
 
 PropertyValue<SymbolPlacementType> SymbolLayer::getDefaultSymbolPlacement() {
-    return SymbolPlacement::defaultValue();
+    return { SymbolPlacement::defaultValue() };
 }
 
 PropertyValue<SymbolPlacementType> SymbolLayer::getSymbolPlacement() const {
@@ -74,7 +74,7 @@ void SymbolLayer::setSymbolPlacement(PropertyValue<SymbolPlacementType> value) {
     impl->observer->onLayerLayoutPropertyChanged(*this, "symbol-placement");
 }
 PropertyValue<float> SymbolLayer::getDefaultSymbolSpacing() {
-    return SymbolSpacing::defaultValue();
+    return { SymbolSpacing::defaultValue() };
 }
 
 PropertyValue<float> SymbolLayer::getSymbolSpacing() const {
@@ -88,7 +88,7 @@ void SymbolLayer::setSymbolSpacing(PropertyValue<float> value) {
     impl->observer->onLayerLayoutPropertyChanged(*this, "symbol-spacing");
 }
 PropertyValue<bool> SymbolLayer::getDefaultSymbolAvoidEdges() {
-    return SymbolAvoidEdges::defaultValue();
+    return { SymbolAvoidEdges::defaultValue() };
 }
 
 PropertyValue<bool> SymbolLayer::getSymbolAvoidEdges() const {
@@ -102,7 +102,7 @@ void SymbolLayer::setSymbolAvoidEdges(PropertyValue<bool> value) {
     impl->observer->onLayerLayoutPropertyChanged(*this, "symbol-avoid-edges");
 }
 PropertyValue<bool> SymbolLayer::getDefaultIconAllowOverlap() {
-    return IconAllowOverlap::defaultValue();
+    return { IconAllowOverlap::defaultValue() };
 }
 
 PropertyValue<bool> SymbolLayer::getIconAllowOverlap() const {
@@ -116,7 +116,7 @@ void SymbolLayer::setIconAllowOverlap(PropertyValue<bool> value) {
     impl->observer->onLayerLayoutPropertyChanged(*this, "icon-allow-overlap");
 }
 PropertyValue<bool> SymbolLayer::getDefaultIconIgnorePlacement() {
-    return IconIgnorePlacement::defaultValue();
+    return { IconIgnorePlacement::defaultValue() };
 }
 
 PropertyValue<bool> SymbolLayer::getIconIgnorePlacement() const {
@@ -130,7 +130,7 @@ void SymbolLayer::setIconIgnorePlacement(PropertyValue<bool> value) {
     impl->observer->onLayerLayoutPropertyChanged(*this, "icon-ignore-placement");
 }
 PropertyValue<bool> SymbolLayer::getDefaultIconOptional() {
-    return IconOptional::defaultValue();
+    return { IconOptional::defaultValue() };
 }
 
 PropertyValue<bool> SymbolLayer::getIconOptional() const {
@@ -144,7 +144,7 @@ void SymbolLayer::setIconOptional(PropertyValue<bool> value) {
     impl->observer->onLayerLayoutPropertyChanged(*this, "icon-optional");
 }
 PropertyValue<AlignmentType> SymbolLayer::getDefaultIconRotationAlignment() {
-    return IconRotationAlignment::defaultValue();
+    return { IconRotationAlignment::defaultValue() };
 }
 
 PropertyValue<AlignmentType> SymbolLayer::getIconRotationAlignment() const {
@@ -158,7 +158,7 @@ void SymbolLayer::setIconRotationAlignment(PropertyValue<AlignmentType> value) {
     impl->observer->onLayerLayoutPropertyChanged(*this, "icon-rotation-alignment");
 }
 PropertyValue<float> SymbolLayer::getDefaultIconSize() {
-    return IconSize::defaultValue();
+    return { IconSize::defaultValue() };
 }
 
 PropertyValue<float> SymbolLayer::getIconSize() const {
@@ -172,7 +172,7 @@ void SymbolLayer::setIconSize(PropertyValue<float> value) {
     impl->observer->onLayerLayoutPropertyChanged(*this, "icon-size");
 }
 PropertyValue<IconTextFitType> SymbolLayer::getDefaultIconTextFit() {
-    return IconTextFit::defaultValue();
+    return { IconTextFit::defaultValue() };
 }
 
 PropertyValue<IconTextFitType> SymbolLayer::getIconTextFit() const {
@@ -186,7 +186,7 @@ void SymbolLayer::setIconTextFit(PropertyValue<IconTextFitType> value) {
     impl->observer->onLayerLayoutPropertyChanged(*this, "icon-text-fit");
 }
 PropertyValue<std::array<float, 4>> SymbolLayer::getDefaultIconTextFitPadding() {
-    return IconTextFitPadding::defaultValue();
+    return { IconTextFitPadding::defaultValue() };
 }
 
 PropertyValue<std::array<float, 4>> SymbolLayer::getIconTextFitPadding() const {
@@ -200,7 +200,7 @@ void SymbolLayer::setIconTextFitPadding(PropertyValue<std::array<float, 4>> valu
     impl->observer->onLayerLayoutPropertyChanged(*this, "icon-text-fit-padding");
 }
 PropertyValue<std::string> SymbolLayer::getDefaultIconImage() {
-    return IconImage::defaultValue();
+    return { IconImage::defaultValue() };
 }
 
 PropertyValue<std::string> SymbolLayer::getIconImage() const {
@@ -213,22 +213,22 @@ void SymbolLayer::setIconImage(PropertyValue<std::string> value) {
     impl->layout.unevaluated.get<IconImage>() = value;
     impl->observer->onLayerLayoutPropertyChanged(*this, "icon-image");
 }
-PropertyValue<float> SymbolLayer::getDefaultIconRotate() {
-    return IconRotate::defaultValue();
+DataDrivenPropertyValue<float> SymbolLayer::getDefaultIconRotate() {
+    return { IconRotate::defaultValue() };
 }
 
-PropertyValue<float> SymbolLayer::getIconRotate() const {
+DataDrivenPropertyValue<float> SymbolLayer::getIconRotate() const {
     return impl->layout.unevaluated.get<IconRotate>();
 }
 
-void SymbolLayer::setIconRotate(PropertyValue<float> value) {
+void SymbolLayer::setIconRotate(DataDrivenPropertyValue<float> value) {
     if (value == getIconRotate())
         return;
     impl->layout.unevaluated.get<IconRotate>() = value;
     impl->observer->onLayerLayoutPropertyChanged(*this, "icon-rotate");
 }
 PropertyValue<float> SymbolLayer::getDefaultIconPadding() {
-    return IconPadding::defaultValue();
+    return { IconPadding::defaultValue() };
 }
 
 PropertyValue<float> SymbolLayer::getIconPadding() const {
@@ -242,7 +242,7 @@ void SymbolLayer::setIconPadding(PropertyValue<float> value) {
     impl->observer->onLayerLayoutPropertyChanged(*this, "icon-padding");
 }
 PropertyValue<bool> SymbolLayer::getDefaultIconKeepUpright() {
-    return IconKeepUpright::defaultValue();
+    return { IconKeepUpright::defaultValue() };
 }
 
 PropertyValue<bool> SymbolLayer::getIconKeepUpright() const {
@@ -256,7 +256,7 @@ void SymbolLayer::setIconKeepUpright(PropertyValue<bool> value) {
     impl->observer->onLayerLayoutPropertyChanged(*this, "icon-keep-upright");
 }
 PropertyValue<std::array<float, 2>> SymbolLayer::getDefaultIconOffset() {
-    return IconOffset::defaultValue();
+    return { IconOffset::defaultValue() };
 }
 
 PropertyValue<std::array<float, 2>> SymbolLayer::getIconOffset() const {
@@ -270,7 +270,7 @@ void SymbolLayer::setIconOffset(PropertyValue<std::array<float, 2>> value) {
     impl->observer->onLayerLayoutPropertyChanged(*this, "icon-offset");
 }
 PropertyValue<AlignmentType> SymbolLayer::getDefaultTextPitchAlignment() {
-    return TextPitchAlignment::defaultValue();
+    return { TextPitchAlignment::defaultValue() };
 }
 
 PropertyValue<AlignmentType> SymbolLayer::getTextPitchAlignment() const {
@@ -284,7 +284,7 @@ void SymbolLayer::setTextPitchAlignment(PropertyValue<AlignmentType> value) {
     impl->observer->onLayerLayoutPropertyChanged(*this, "text-pitch-alignment");
 }
 PropertyValue<AlignmentType> SymbolLayer::getDefaultTextRotationAlignment() {
-    return TextRotationAlignment::defaultValue();
+    return { TextRotationAlignment::defaultValue() };
 }
 
 PropertyValue<AlignmentType> SymbolLayer::getTextRotationAlignment() const {
@@ -298,7 +298,7 @@ void SymbolLayer::setTextRotationAlignment(PropertyValue<AlignmentType> value) {
     impl->observer->onLayerLayoutPropertyChanged(*this, "text-rotation-alignment");
 }
 PropertyValue<std::string> SymbolLayer::getDefaultTextField() {
-    return TextField::defaultValue();
+    return { TextField::defaultValue() };
 }
 
 PropertyValue<std::string> SymbolLayer::getTextField() const {
@@ -312,7 +312,7 @@ void SymbolLayer::setTextField(PropertyValue<std::string> value) {
     impl->observer->onLayerLayoutPropertyChanged(*this, "text-field");
 }
 PropertyValue<std::vector<std::string>> SymbolLayer::getDefaultTextFont() {
-    return TextFont::defaultValue();
+    return { TextFont::defaultValue() };
 }
 
 PropertyValue<std::vector<std::string>> SymbolLayer::getTextFont() const {
@@ -326,7 +326,7 @@ void SymbolLayer::setTextFont(PropertyValue<std::vector<std::string>> value) {
     impl->observer->onLayerLayoutPropertyChanged(*this, "text-font");
 }
 PropertyValue<float> SymbolLayer::getDefaultTextSize() {
-    return TextSize::defaultValue();
+    return { TextSize::defaultValue() };
 }
 
 PropertyValue<float> SymbolLayer::getTextSize() const {
@@ -340,7 +340,7 @@ void SymbolLayer::setTextSize(PropertyValue<float> value) {
     impl->observer->onLayerLayoutPropertyChanged(*this, "text-size");
 }
 PropertyValue<float> SymbolLayer::getDefaultTextMaxWidth() {
-    return TextMaxWidth::defaultValue();
+    return { TextMaxWidth::defaultValue() };
 }
 
 PropertyValue<float> SymbolLayer::getTextMaxWidth() const {
@@ -354,7 +354,7 @@ void SymbolLayer::setTextMaxWidth(PropertyValue<float> value) {
     impl->observer->onLayerLayoutPropertyChanged(*this, "text-max-width");
 }
 PropertyValue<float> SymbolLayer::getDefaultTextLineHeight() {
-    return TextLineHeight::defaultValue();
+    return { TextLineHeight::defaultValue() };
 }
 
 PropertyValue<float> SymbolLayer::getTextLineHeight() const {
@@ -368,7 +368,7 @@ void SymbolLayer::setTextLineHeight(PropertyValue<float> value) {
     impl->observer->onLayerLayoutPropertyChanged(*this, "text-line-height");
 }
 PropertyValue<float> SymbolLayer::getDefaultTextLetterSpacing() {
-    return TextLetterSpacing::defaultValue();
+    return { TextLetterSpacing::defaultValue() };
 }
 
 PropertyValue<float> SymbolLayer::getTextLetterSpacing() const {
@@ -382,7 +382,7 @@ void SymbolLayer::setTextLetterSpacing(PropertyValue<float> value) {
     impl->observer->onLayerLayoutPropertyChanged(*this, "text-letter-spacing");
 }
 PropertyValue<TextJustifyType> SymbolLayer::getDefaultTextJustify() {
-    return TextJustify::defaultValue();
+    return { TextJustify::defaultValue() };
 }
 
 PropertyValue<TextJustifyType> SymbolLayer::getTextJustify() const {
@@ -396,7 +396,7 @@ void SymbolLayer::setTextJustify(PropertyValue<TextJustifyType> value) {
     impl->observer->onLayerLayoutPropertyChanged(*this, "text-justify");
 }
 PropertyValue<TextAnchorType> SymbolLayer::getDefaultTextAnchor() {
-    return TextAnchor::defaultValue();
+    return { TextAnchor::defaultValue() };
 }
 
 PropertyValue<TextAnchorType> SymbolLayer::getTextAnchor() const {
@@ -410,7 +410,7 @@ void SymbolLayer::setTextAnchor(PropertyValue<TextAnchorType> value) {
     impl->observer->onLayerLayoutPropertyChanged(*this, "text-anchor");
 }
 PropertyValue<float> SymbolLayer::getDefaultTextMaxAngle() {
-    return TextMaxAngle::defaultValue();
+    return { TextMaxAngle::defaultValue() };
 }
 
 PropertyValue<float> SymbolLayer::getTextMaxAngle() const {
@@ -424,7 +424,7 @@ void SymbolLayer::setTextMaxAngle(PropertyValue<float> value) {
     impl->observer->onLayerLayoutPropertyChanged(*this, "text-max-angle");
 }
 PropertyValue<float> SymbolLayer::getDefaultTextRotate() {
-    return TextRotate::defaultValue();
+    return { TextRotate::defaultValue() };
 }
 
 PropertyValue<float> SymbolLayer::getTextRotate() const {
@@ -438,7 +438,7 @@ void SymbolLayer::setTextRotate(PropertyValue<float> value) {
     impl->observer->onLayerLayoutPropertyChanged(*this, "text-rotate");
 }
 PropertyValue<float> SymbolLayer::getDefaultTextPadding() {
-    return TextPadding::defaultValue();
+    return { TextPadding::defaultValue() };
 }
 
 PropertyValue<float> SymbolLayer::getTextPadding() const {
@@ -452,7 +452,7 @@ void SymbolLayer::setTextPadding(PropertyValue<float> value) {
     impl->observer->onLayerLayoutPropertyChanged(*this, "text-padding");
 }
 PropertyValue<bool> SymbolLayer::getDefaultTextKeepUpright() {
-    return TextKeepUpright::defaultValue();
+    return { TextKeepUpright::defaultValue() };
 }
 
 PropertyValue<bool> SymbolLayer::getTextKeepUpright() const {
@@ -466,7 +466,7 @@ void SymbolLayer::setTextKeepUpright(PropertyValue<bool> value) {
     impl->observer->onLayerLayoutPropertyChanged(*this, "text-keep-upright");
 }
 PropertyValue<TextTransformType> SymbolLayer::getDefaultTextTransform() {
-    return TextTransform::defaultValue();
+    return { TextTransform::defaultValue() };
 }
 
 PropertyValue<TextTransformType> SymbolLayer::getTextTransform() const {
@@ -480,7 +480,7 @@ void SymbolLayer::setTextTransform(PropertyValue<TextTransformType> value) {
     impl->observer->onLayerLayoutPropertyChanged(*this, "text-transform");
 }
 PropertyValue<std::array<float, 2>> SymbolLayer::getDefaultTextOffset() {
-    return TextOffset::defaultValue();
+    return { TextOffset::defaultValue() };
 }
 
 PropertyValue<std::array<float, 2>> SymbolLayer::getTextOffset() const {
@@ -494,7 +494,7 @@ void SymbolLayer::setTextOffset(PropertyValue<std::array<float, 2>> value) {
     impl->observer->onLayerLayoutPropertyChanged(*this, "text-offset");
 }
 PropertyValue<bool> SymbolLayer::getDefaultTextAllowOverlap() {
-    return TextAllowOverlap::defaultValue();
+    return { TextAllowOverlap::defaultValue() };
 }
 
 PropertyValue<bool> SymbolLayer::getTextAllowOverlap() const {
@@ -508,7 +508,7 @@ void SymbolLayer::setTextAllowOverlap(PropertyValue<bool> value) {
     impl->observer->onLayerLayoutPropertyChanged(*this, "text-allow-overlap");
 }
 PropertyValue<bool> SymbolLayer::getDefaultTextIgnorePlacement() {
-    return TextIgnorePlacement::defaultValue();
+    return { TextIgnorePlacement::defaultValue() };
 }
 
 PropertyValue<bool> SymbolLayer::getTextIgnorePlacement() const {
@@ -522,7 +522,7 @@ void SymbolLayer::setTextIgnorePlacement(PropertyValue<bool> value) {
     impl->observer->onLayerLayoutPropertyChanged(*this, "text-ignore-placement");
 }
 PropertyValue<bool> SymbolLayer::getDefaultTextOptional() {
-    return TextOptional::defaultValue();
+    return { TextOptional::defaultValue() };
 }
 
 PropertyValue<bool> SymbolLayer::getTextOptional() const {

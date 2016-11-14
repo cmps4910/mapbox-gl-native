@@ -38,7 +38,6 @@ void Painter::renderFill(PaintParameters& parameters,
         auto draw = [&] (uint8_t sublayer,
                          auto& program,
                          const auto& drawMode,
-                         const auto& vertexBuffer,
                          const auto& indexBuffer,
                          const auto& segments) {
             program.draw(
@@ -51,7 +50,6 @@ void Painter::renderFill(PaintParameters& parameters,
                     tile.translatedMatrix(properties.get<FillTranslate>(),
                                           properties.get<FillTranslateAnchor>(),
                                           state),
-                    properties.get<FillOpacity>(),
                     context.viewport.getCurrentValue().size,
                     *imagePosA,
                     *imagePosB,
@@ -59,16 +57,16 @@ void Painter::renderFill(PaintParameters& parameters,
                     tile.id,
                     state
                 ),
-                vertexBuffer,
+                *bucket.vertexBuffer,
                 indexBuffer,
-                segments
+                segments,
+                bucket.paintData.attributeBindings(properties)
             );
         };
 
         draw(0,
              parameters.programs.fillPattern,
              gl::Triangles(),
-             *bucket.vertexBuffer,
              *bucket.triangleIndexBuffer,
              bucket.triangleSegments);
 
@@ -79,17 +77,15 @@ void Painter::renderFill(PaintParameters& parameters,
         draw(2,
              parameters.programs.fillOutlinePattern,
              gl::Lines { 2.0f },
-             *bucket.vertexBuffer,
              *bucket.lineIndexBuffer,
              bucket.lineSegments);
     } else {
         auto draw = [&] (uint8_t sublayer,
                          auto& program,
-                         Color outlineColor,
                          const auto& drawMode,
-                         const auto& vertexBuffer,
                          const auto& indexBuffer,
-                         const auto& segments) {
+                         const auto& segments,
+                         const auto& bindings) {
             program.draw(
                 context,
                 drawMode,
@@ -97,50 +93,51 @@ void Painter::renderFill(PaintParameters& parameters,
                 stencilModeForClipping(tile.clip),
                 colorModeForRenderPass(),
                 FillProgram::UniformValues {
-                    uniforms::u_matrix::Value{ tile.translatedMatrix(properties.get<FillTranslate>(),
-                                               properties.get<FillTranslateAnchor>(),
-                                               state) },
-                    uniforms::u_opacity::Value{ properties.get<FillOpacity>() },
-                    uniforms::u_color::Value{ properties.get<FillColor>() },
-                    uniforms::u_outline_color::Value{ outlineColor },
+                    uniforms::u_matrix::Value{
+                        tile.translatedMatrix(properties.get<FillTranslate>(),
+                                              properties.get<FillTranslateAnchor>(),
+                                              state)
+                    },
                     uniforms::u_world::Value{ context.viewport.getCurrentValue().size },
                 },
-                vertexBuffer,
+                *bucket.vertexBuffer,
                 indexBuffer,
-                segments
+                segments,
+                bindings
             );
         };
 
         if (properties.get<FillAntialias>() && !layer.impl->paint.unevaluated.get<FillOutlineColor>().isUndefined() && pass == RenderPass::Translucent) {
             draw(2,
                  parameters.programs.fillOutline,
-                 properties.get<FillOutlineColor>(),
                  gl::Lines { 2.0f },
-                 *bucket.vertexBuffer,
                  *bucket.lineIndexBuffer,
-                 bucket.lineSegments);
+                 bucket.lineSegments,
+                 bucket.paintData.attributeBindings(properties));
         }
 
         // Only draw the fill when it's opaque and we're drawing opaque fragments,
         // or when it's translucent and we're drawing translucent fragments.
-        if ((properties.get<FillColor>().a >= 1.0f && properties.get<FillOpacity>() >= 1.0f) == (pass == RenderPass::Opaque)) {
+        if ((properties.get<FillColor>().constantOr(Color()).a >= 1.0f
+          && properties.get<FillOpacity>().constantOr(0) >= 1.0f) == (pass == RenderPass::Opaque)) {
             draw(1,
                  parameters.programs.fill,
-                 properties.get<FillOutlineColor>(),
                  gl::Triangles(),
-                 *bucket.vertexBuffer,
                  *bucket.triangleIndexBuffer,
-                 bucket.triangleSegments);
+                 bucket.triangleSegments,
+                 bucket.paintData.attributeBindings(properties));
         }
 
         if (properties.get<FillAntialias>() && layer.impl->paint.unevaluated.get<FillOutlineColor>().isUndefined() && pass == RenderPass::Translucent) {
+            auto bindings = bucket.paintData.attributeBindings(properties);
+            bindings.get<FillOutlineColor::Attribute>() = bindings.get<FillColor::Attribute>();
+
             draw(2,
                  parameters.programs.fillOutline,
-                 properties.get<FillColor>(),
                  gl::Lines { 2.0f },
-                 *bucket.vertexBuffer,
                  *bucket.lineIndexBuffer,
-                 bucket.lineSegments);
+                 bucket.lineSegments,
+                 bindings);
         }
     }
 }
