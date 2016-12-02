@@ -902,7 +902,6 @@
 			children = (
 				3575798F1D513EF1000B822E /* Layers */,
 				35B8E08B1D6C8B5100E768D2 /* MGLFilterTests.mm */,
-				92BE56761DEDD44500A4F2B6 /* MGLSourceTests.m */,
 				DA2207BE1DC0805F0002F84D /* MGLStyleValueTests.swift */,
 				40CFA64E1D78754A008103BD /* Sources */,
 				DA2207BD1DC0805F0002F84D /* test-Bridging-Header.h */,
@@ -1059,8 +1058,8 @@
 				DA35A2A91CCA058D00E826B2 /* MGLCoordinateFormatterTests.m */,
 				DA0CD58F1CF56F6A00A5F5A5 /* MGLFeatureTests.mm */,
 				DA2E885C1CC0382C00F24E7B /* MGLGeometryTests.mm */,
-				DA2DBBCC1D51E80400D38FF9 /* MGLMapViewTests.h */,
-				DA2DBBCD1D51E80400D38FF9 /* MGLMapViewTests.m */,
+				DA2DBBCC1D51E80400D38FF9 /* MGLStyleLayerTests.h */,
+				DA2DBBCD1D51E80400D38FF9 /* MGLStyleLayerTests.m */,
 				35E208A61D24210F00EC9A46 /* MGLNSDataAdditionsTests.m */,
 				DA2E885D1CC0382C00F24E7B /* MGLOfflinePackTests.m */,
 				DA2E885E1CC0382C00F24E7B /* MGLOfflineRegionTests.m */,

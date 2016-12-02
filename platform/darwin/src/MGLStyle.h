@@ -199,6 +199,11 @@ static const NSInteger MGLStyleDefaultVersion = 9;
 
 /**
  Adds a new source to the current style.
+
+ @note Adding the same source instance more than once will result in a 
+    `MGLRedundantSourceException`. Reusing the same source identifier, even with
+    different source instances, will result in a 
+    `MGLRedundantSourceIdentiferException`.
  
  @param source The source to add to the current style.
  */
@@ -247,6 +252,10 @@ static const NSInteger MGLStyleDefaultVersion = 9;
 /**
  Adds a new layer on top of existing layers.
 
+ @note Adding the same layer instance more than once will result in a
+    `MGLRedundantLayerException`. Reusing the same layer identifer, even with
+    different layer instances, will also result in an exception.
+
  @param layer The layer object to add to the map view. This object must be an
     instance of a concrete subclass of `MGLStyleLayer`.
  */
@@ -255,6 +264,10 @@ static const NSInteger MGLStyleDefaultVersion = 9;
 /**
  Inserts a new layer into the style at the given index.
  
+ @note Adding the same layer instance more than once will result in a
+    `MGLRedundantLayerException`. Reusing the same layer identifer, even with
+    different layer instances, will also result in an exception.
+
  @param layer The layer to insert.
  @param index The index at which to insert the layer. An index of 0 would send
     the layer to the back; an index equal to the number of objects in the
@@ -272,6 +285,10 @@ static const NSInteger MGLStyleDefaultVersion = 9;
     inspectable in Interface Builder, or a manually constructed `NSURL`. This
     approach also avoids layer identifer name changes that will occur in the default
     style’s layers over time.
+ 
+    Inserting the same layer instance more than once will result in a
+    `MGLRedundantLayerException`. Reusing the same layer identifer, even with
+    different layer instances, will also result in an exception.
 
  @param layer The layer to insert.
  @param sibling An existing layer in the style.
@@ -288,6 +305,10 @@ static const NSInteger MGLStyleDefaultVersion = 9;
     inspectable in Interface Builder, or a manually constructed `NSURL`. This
     approach also avoids layer identifer name changes that will occur in the default
     style’s layers over time.
+ 
+    Inserting the same layer instance more than once will result in a
+    `MGLRedundantLayerException`. Reusing the same layer identifer, even with
+    different layer instances, will also result in an exception.
 
  @param layer The layer to insert.
  @param sibling An existing layer in the style.
