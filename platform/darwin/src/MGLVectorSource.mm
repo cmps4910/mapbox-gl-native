@@ -18,8 +18,6 @@
     std::unique_ptr<mbgl::style::VectorSource> _pendingSource;
 }
 
-static NSString *MGLVectorSourceType   = @"vector";
-
 - (instancetype)initWithIdentifier:(NSString *)identifier URL:(NSURL *)url
 {
     if (self = [super initWithIdentifier:identifier])
@@ -62,6 +60,20 @@ static NSString *MGLVectorSourceType   = @"vector";
 - (void)addToMapView:(MGLMapView *)mapView
 {
     mapView.mbglMap->addSource(std::move(_pendingSource));
+}
+
+- (void)removeFromMapView:(MGLMapView *)mapView
+{
+    auto removedSource = mapView.mbglMap->removeSource(self.identifier.UTF8String);
+
+    _pendingSource = std::move(reinterpret_cast<std::unique_ptr<mbgl::style::VectorSource> &>(removedSource));
+    self.rawSource = _pendingSource.get();
+}
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@: %p; identifier = %@; URL = %@; tileSet = %@>",
+            NSStringFromClass([self class]), (void *)self, self.identifier, self.URL, self.tileSet];
 }
 
 @end

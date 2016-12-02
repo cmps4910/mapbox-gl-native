@@ -24,7 +24,19 @@
  can still be changed but the changes will not be visible until the `MGLSource` 
  is added back to the map via `-[MGLStyle addSource:]` and styled with a 
  `MGLLayer`.
+ 
+ This method throws a C++ exception if a source with the same identifier as the
+ receiver is already present in the given map view’s style.
  */
 - (void)addToMapView:(MGLMapView *)mapView;
+
+/**
+ Removes the mbgl source that this object represents from the mbgl map.
+ 
+ When a mbgl source is removed, ownership of the object is transferred back
+ to the `MGLSource` instance and the unique_ptr reference is valid again. It is
+ safe to add the source back to the style after it is removed.
+ */
+- (void)removeFromMapView:(MGLMapView *)mapView;
 
 @end

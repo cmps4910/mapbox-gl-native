@@ -65,4 +65,20 @@
     mapView.mbglMap->addSource(std::move(_pendingSource));
 }
 
+- (void)removeFromMapView:(MGLMapView *)mapView
+{
+    auto removedSource = mapView.mbglMap->removeSource(self.identifier.UTF8String);
+
+    _pendingSource = std::move(reinterpret_cast<std::unique_ptr<mbgl::style::RasterSource> &>(removedSource));
+    self.rawSource = _pendingSource.get();
+}
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:
+            @"<%@: %p; identifier = %@; URL = %@; tileSet = %@; tileSize = %lu>",
+            NSStringFromClass([self class]), (void *)self, self.identifier, self.URL,
+            self.tileSet, (unsigned long)self.tileSize];
+}
+
 @end
